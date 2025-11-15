@@ -1,17 +1,17 @@
-# json-to-tree
+# schemascii
 
 Convert JSON, JSONC, or YAML file structure to ASCII directory tree.
 
 ## Installation
 
 ```bash
-npm install json-to-tree
+npm install schemascii
 ```
 
 Or use it directly with npx:
 
 ```bash
-npx json-to-tree <file>
+npx schemascii <file>
 ```
 
 Supports JSON, JSONC, and YAML file formats.
@@ -22,22 +22,22 @@ Supports JSON, JSONC, and YAML file formats.
 
 ```bash
 # Output to stdout (JSON)
-json-to-tree structure.json
+schemascii structure.json
 
 # JSONC with comments
-json-to-tree structure.jsonc
+schemascii structure.jsonc
 
 # YAML format
-json-to-tree structure.yaml
+schemascii structure.yaml
 
 # Output to file
-json-to-tree structure.json -o tree.txt
+schemascii structure.json -o tree.txt
 ```
 
 ### Programmatic API
 
 ```typescript
-import { jsonToTree, jsonFileToTree, fileToTree } from 'json-to-tree';
+import { jsonToTree, jsonFileToTree, fileToTree } from 'schemascii';
 
 // From object
 const json = {
