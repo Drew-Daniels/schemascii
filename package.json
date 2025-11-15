@@ -23,7 +23,8 @@
     "ascii",
     "cli"
   ],
-  "author": "",
+  "author": "Drew Daniels",
+  "repository": "Drew-Daniels/json-to-tree",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.0.0",
@@ -34,4 +35,3 @@
     "README.md"
   ]
 }
-
