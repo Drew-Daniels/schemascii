@@ -36,30 +36,30 @@ schemascii structure.xml
 # Output to file
 schemascii structure.json -o tree.txt
 
-# Limit tree depth
-schemascii structure.json --max-depth 2
+# Limit tree depth (using shorthand)
+schemascii structure.json -d 2
 
-# Custom characters (ASCII style)
-schemascii structure.json --branch-char "|" --corner-char "'" --tee-char "+" --horizontal-char "-"
+# Custom characters (ASCII style, using shorthand)
+schemascii structure.json -b "|" -c "'" -t "+" -H "-"
 
-# Custom indent and root prefix
-schemascii structure.json --indent-size 4 --root-prefix "myproject"
+# Custom indent and root prefix (using shorthand)
+schemascii structure.json -i 4 -r "myproject"
 
-# Combine multiple options
-schemascii structure.json --max-depth 3 --indent-size 3 --root-prefix "project"
+# Combine multiple options (using shorthand)
+schemascii structure.json -d 3 -i 3 -r "project"
 ```
 
 #### CLI Options
 
-All TreeOptions can be specified via command-line arguments:
+All TreeOptions can be specified via command-line arguments (both long and short forms):
 
-- `--root-prefix <text>` - Root prefix text to display at the top
-- `--branch-char <char>` - Character for vertical branches (default: │)
-- `--corner-char <char>` - Character for corner connectors (default: └)
-- `--tee-char <char>` - Character for tee connectors (default: ├)
-- `--horizontal-char <char>` - Character for horizontal lines (default: ─)
-- `--indent-size <number>` - Number of spaces for indentation (default: 2)
-- `--max-depth <number>` - Maximum depth to display (default: unlimited)
+- `--root-prefix, -r <text>` - Root prefix text to display at the top
+- `--branch-char, -b <char>` - Character for vertical branches (default: │)
+- `--corner-char, -c <char>` - Character for corner connectors (default: └)
+- `--tee-char, -t <char>` - Character for tee connectors (default: ├)
+- `--horizontal-char, -H <char>` - Character for horizontal lines (default: ─)
+- `--indent-size, -i <number>` - Number of spaces for indentation (default: 2)
+- `--max-depth, -d <number>` - Maximum depth to display (default: unlimited)
 - `--output, -o <file>` - Output file path (default: stdout)
 - `--help, -h` - Show help message
 

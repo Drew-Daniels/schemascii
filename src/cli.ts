@@ -27,7 +27,7 @@ function parseOptions(args: string[]): { options: TreeOptions; outputFile?: stri
     }
     
     // Handle TreeOptions
-    if (arg === '--root-prefix' || arg === '--rootPrefix') {
+    if (arg === '--root-prefix' || arg === '--rootPrefix' || arg === '-r') {
       if (i + 1 < args.length) {
         result.options.rootPrefix = args[i + 1];
         i += 2;
@@ -35,7 +35,7 @@ function parseOptions(args: string[]): { options: TreeOptions; outputFile?: stri
       }
     }
     
-    if (arg === '--branch-char' || arg === '--branchChar') {
+    if (arg === '--branch-char' || arg === '--branchChar' || arg === '-b') {
       if (i + 1 < args.length) {
         result.options.branchChar = args[i + 1];
         i += 2;
@@ -43,7 +43,7 @@ function parseOptions(args: string[]): { options: TreeOptions; outputFile?: stri
       }
     }
     
-    if (arg === '--corner-char' || arg === '--cornerChar') {
+    if (arg === '--corner-char' || arg === '--cornerChar' || arg === '-c') {
       if (i + 1 < args.length) {
         result.options.cornerChar = args[i + 1];
         i += 2;
@@ -51,7 +51,7 @@ function parseOptions(args: string[]): { options: TreeOptions; outputFile?: stri
       }
     }
     
-    if (arg === '--tee-char' || arg === '--teeChar') {
+    if (arg === '--tee-char' || arg === '--teeChar' || arg === '-t') {
       if (i + 1 < args.length) {
         result.options.teeChar = args[i + 1];
         i += 2;
@@ -59,7 +59,7 @@ function parseOptions(args: string[]): { options: TreeOptions; outputFile?: stri
       }
     }
     
-    if (arg === '--horizontal-char' || arg === '--horizontalChar') {
+    if (arg === '--horizontal-char' || arg === '--horizontalChar' || arg === '-H') {
       if (i + 1 < args.length) {
         result.options.horizontalChar = args[i + 1];
         i += 2;
@@ -67,7 +67,7 @@ function parseOptions(args: string[]): { options: TreeOptions; outputFile?: stri
       }
     }
     
-    if (arg === '--indent-size' || arg === '--indentSize') {
+    if (arg === '--indent-size' || arg === '--indentSize' || arg === '-i') {
       if (i + 1 < args.length) {
         const size = parseInt(args[i + 1], 10);
         if (!isNaN(size)) {
@@ -78,7 +78,7 @@ function parseOptions(args: string[]): { options: TreeOptions; outputFile?: stri
       }
     }
     
-    if (arg === '--max-depth' || arg === '--maxDepth') {
+    if (arg === '--max-depth' || arg === '--maxDepth' || arg === '-d') {
       if (i + 1 < args.length) {
         const depth = parseInt(args[i + 1], 10);
         if (!isNaN(depth)) {
@@ -108,15 +108,15 @@ Arguments:
   <file>         Path to the JSON, JSONC, YAML, or XML file to convert
 
 Options:
-  --help, -h              Show this help message
-  --output, -o             Output file path (default: stdout)
-  --root-prefix <text>     Root prefix text to display at the top
-  --branch-char <char>     Character for vertical branches (default: │)
-  --corner-char <char>     Character for corner connectors (default: └)
-  --tee-char <char>        Character for tee connectors (default: ├)
-  --horizontal-char <char> Character for horizontal lines (default: ─)
-  --indent-size <number>   Number of spaces for indentation (default: 2)
-  --max-depth <number>      Maximum depth to display (default: unlimited)
+  --help, -h                    Show this help message
+  --output, -o                  Output file path (default: stdout)
+  --root-prefix, -r <text>      Root prefix text to display at the top
+  --branch-char, -b <char>      Character for vertical branches (default: │)
+  --corner-char, -c <char>      Character for corner connectors (default: └)
+  --tee-char, -t <char>         Character for tee connectors (default: ├)
+  --horizontal-char, -H <char>  Character for horizontal lines (default: ─)
+  --indent-size, -i <number>    Number of spaces for indentation (default: 2)
+  --max-depth, -d <number>      Maximum depth to display (default: unlimited)
 
 Examples:
   schemascii structure.json
@@ -124,9 +124,9 @@ Examples:
   schemascii structure.yaml
   schemascii structure.xml
   schemascii structure.json -o tree.txt
-  schemascii structure.json --max-depth 2
-  schemascii structure.json --branch-char "|" --corner-char "'" --tee-char "+"
-  schemascii structure.json --indent-size 4 --max-depth 3
+  schemascii structure.json -d 2
+  schemascii structure.json -b "|" -c "'" -t "+" -H "-"
+  schemascii structure.json -i 4 -d 3 -r "myproject"
     `);
     process.exit(0);
   }
