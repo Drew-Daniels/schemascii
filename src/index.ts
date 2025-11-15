@@ -6,9 +6,10 @@ export interface TreeOptions {
   horizontalChar?: string;
   indentSize?: number;
   maxDepth?: number;
+  maxDepthIndicator?: string;
 }
 
-type RequiredTreeOptions = Required<Omit<TreeOptions, 'maxDepth'>> & Pick<TreeOptions, 'maxDepth'>;
+type RequiredTreeOptions = Required<Omit<TreeOptions, 'maxDepth' | 'maxDepthIndicator'>> & Pick<TreeOptions, 'maxDepth' | 'maxDepthIndicator'>;
 
 const DEFAULT_OPTIONS: RequiredTreeOptions = {
   rootPrefix: '',
@@ -18,6 +19,7 @@ const DEFAULT_OPTIONS: RequiredTreeOptions = {
   horizontalChar: '─',
   indentSize: 2,
   maxDepth: undefined,
+  maxDepthIndicator: '...',
 };
 
 function buildTree(
@@ -49,7 +51,7 @@ function buildTree(
         const childKeys = Object.keys(value);
         if (childKeys.length > 0) {
           const indicatorPrefix = prefix + (isLastKey ? ' '.repeat(options.indentSize) : options.branchChar + ' '.repeat(options.indentSize - 1));
-          lines.push(indicatorPrefix + '...');
+          lines.push(indicatorPrefix + (options.maxDepthIndicator || '...'));
         }
       } else {
         const nextPrefix = prefix + (isLastKey ? ' '.repeat(options.indentSize) : options.branchChar + ' '.repeat(options.indentSize - 1));
@@ -99,7 +101,7 @@ export function schemaToTree(
         const childKeys = Object.keys(value);
         if (childKeys.length > 0) {
           const indicatorPrefix = prefix + (isLastKey ? ' '.repeat(opts.indentSize) : opts.branchChar + ' '.repeat(opts.indentSize - 1));
-          lines.push(indicatorPrefix + '...');
+          lines.push(indicatorPrefix + (opts.maxDepthIndicator || '...'));
         }
       } else {
         const nextPrefix = prefix + (isLastKey ? ' '.repeat(opts.indentSize) : opts.branchChar + ' '.repeat(opts.indentSize - 1));

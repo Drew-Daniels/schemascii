@@ -89,6 +89,14 @@ function parseOptions(args: string[]): { options: TreeOptions; outputFile?: stri
       }
     }
     
+    if (arg === '--max-depth-indicator' || arg === '-m') {
+      if (i + 1 < args.length) {
+        result.options.maxDepthIndicator = args[i + 1];
+        i += 2;
+        continue;
+      }
+    }
+    
     i++;
   }
   
@@ -117,6 +125,7 @@ Options:
   --horizontal-char, -H <char>  Character for horizontal lines (default: ─)
   --indent-size, -i <number>    Number of spaces for indentation (default: 2)
   --max-depth, -d <number>      Maximum depth to display (default: unlimited)
+  --max-depth-indicator, -m <text> Text to show when max depth is reached (default: "...")
 
 Examples:
   schemascii structure.json
@@ -127,6 +136,7 @@ Examples:
   schemascii structure.json -d 2
   schemascii structure.json -b "|" -c "'" -t "+" -H "-"
   schemascii structure.json -i 4 -d 3 -r "myproject"
+  schemascii structure.json -d 2 -m ">>>"
     `);
     process.exit(0);
   }

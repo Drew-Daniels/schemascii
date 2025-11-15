@@ -47,6 +47,10 @@ schemascii structure.json -i 4 -r "myproject"
 
 # Combine multiple options (using shorthand)
 schemascii structure.json -d 3 -i 3 -r "project"
+
+# Custom max depth indicator
+schemascii structure.json -d 2 -m ">>>"
+schemascii structure.json -d 2 -m "[more]"
 ```
 
 #### CLI Options
@@ -60,6 +64,7 @@ All TreeOptions can be specified via command-line arguments (both long and short
 - `--horizontal-char, -H <char>` - Character for horizontal lines (default: ─)
 - `--indent-size, -i <number>` - Number of spaces for indentation (default: 2)
 - `--max-depth, -d <number>` - Maximum depth to display (default: unlimited)
+- `--max-depth-indicator, -m <text>` - Text shown when max depth is reached (default: "...")
 - `--output, -o <file>` - Output file path (default: stdout)
 - `--help, -h` - Show help message
 
@@ -202,17 +207,26 @@ const tree = schemaToTree(json, {
   teeChar: '├',
   horizontalChar: '─',
   indentSize: 2,
-  maxDepth: 3  // Limit tree depth to 3 levels
+  maxDepth: 3,  // Limit tree depth to 3 levels
+  maxDepthIndicator: '...'  // Text shown when max depth is reached
 });
 ```
 
 ### Max Depth
 
-You can limit the depth of the tree using the `maxDepth` option. When the maximum depth is reached, a `...` indicator is shown to indicate that there's more content below. The depth is counted from the root level (depth 0), so `maxDepth: 1` shows root items and their direct children, `maxDepth: 2` shows up to grandchildren, etc.
+You can limit the depth of the tree using the `maxDepth` option. When the maximum depth is reached, an indicator (default: `...`) is shown to indicate that there's more content below. The depth is counted from the root level (depth 0), so `maxDepth: 1` shows root items and their direct children, `maxDepth: 2` shows up to grandchildren, etc.
+
+You can customize the indicator text using the `maxDepthIndicator` option:
 
 ```typescript
 // Limit to 2 levels deep (root + 2 levels)
 const tree = schemaToTree(deepStructure, { maxDepth: 2 });
+
+// Custom indicator text
+const tree = schemaToTree(deepStructure, { 
+  maxDepth: 2, 
+  maxDepthIndicator: '>>>' 
+});
 ```
 
 Example output with `maxDepth: 2`:
@@ -229,6 +243,22 @@ Example output with `maxDepth: 2`:
 └── tests
     └── unit
         ...
+```
+
+Example with custom indicator (`maxDepthIndicator: '>>>'`):
+```
+.
+├── src
+│   ├── components
+│   │   ├── Button.tsx
+│   │   └── Input.tsx
+│   │       >>>        // custom indicator
+│   └── utils
+│       └── helpers
+│           >>>        // custom indicator
+└── tests
+    └── unit
+        >>>
 ```
 
 ## License
