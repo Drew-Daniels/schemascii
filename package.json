@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",
-    "test": "npm run test:shallow:json && npm run test:medium:json && npm run test:deep:json && npm run test:mixed:json && npm run test:shallow:jsonc && npm run test:medium:jsonc && npm run test:deep:jsonc && npm run test:shallow:yaml && npm run test:medium:yaml && npm run test:deep:yaml && npm run test:shallow:xml && npm run test:medium:xml && npm run test:deep:xml && npm run test:characters",
+    "test": "npm run test:shallow:json && npm run test:medium:json && npm run test:deep:json && npm run test:mixed:json && npm run test:shallow:jsonc && npm run test:medium:jsonc && npm run test:deep:jsonc && npm run test:shallow:yaml && npm run test:medium:yaml && npm run test:deep:yaml && npm run test:shallow:xml && npm run test:medium:xml && npm run test:deep:xml && npm run test:characters && npm run test:maxdepth",
     "test:shallow:json": "echo \"=== shallow.json ===\" && node dist/cli.js examples/shallow.json",
     "test:medium:json": "echo \"\\n=== medium.json ===\" && node dist/cli.js examples/medium.json",
     "test:deep:json": "echo \"\\n=== deep.json ===\" && node dist/cli.js examples/deep.json",
@@ -24,7 +24,8 @@
     "test:shallow:xml": "echo \"\\n=== shallow.xml ===\" && node dist/cli.js examples/shallow.xml",
     "test:medium:xml": "echo \"\\n=== medium.xml ===\" && node dist/cli.js examples/medium.xml",
     "test:deep:xml": "echo \"\\n=== deep.xml ===\" && node dist/cli.js examples/deep.xml",
-    "test:characters": "echo \"\\n=== Testing Alternative Characters ===\" && node test-characters.js"
+    "test:characters": "echo \"\\n=== Testing Alternative Characters ===\" && node test-characters.js",
+    "test:maxdepth": "echo \"\\n=== Testing Max Depth ===\" && node test-maxdepth.js"
   },
   "keywords": [
     "json",

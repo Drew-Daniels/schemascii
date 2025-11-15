@@ -5,24 +5,33 @@ export interface TreeOptions {
   teeChar?: string;
   horizontalChar?: string;
   indentSize?: number;
+  maxDepth?: number;
 }
 
-const DEFAULT_OPTIONS: Required<TreeOptions> = {
+type RequiredTreeOptions = Required<Omit<TreeOptions, 'maxDepth'>> & Pick<TreeOptions, 'maxDepth'>;
+
+const DEFAULT_OPTIONS: RequiredTreeOptions = {
   rootPrefix: '',
   branchChar: '│',
   cornerChar: '└',
   teeChar: '├',
   horizontalChar: '─',
   indentSize: 2,
+  maxDepth: undefined,
 };
 
 function buildTree(
   obj: Record<string, any>,
   prefix: string = '',
-  options: Required<TreeOptions> = DEFAULT_OPTIONS
+  options: RequiredTreeOptions = DEFAULT_OPTIONS,
+  currentDepth: number = 0
 ): string[] {
   const lines: string[] = [];
   const keys = Object.keys(obj);
+  
+  // Check if we've reached max depth
+  const maxDepth = options.maxDepth;
+  const atMaxDepth = maxDepth !== undefined && currentDepth >= maxDepth;
   
   keys.forEach((key, index) => {
     const isLastKey = index === keys.length - 1;
@@ -33,11 +42,20 @@ function buildTree(
     // Add the current directory/file
     lines.push(currentPrefix + key);
     
-    // If the value is an object (nested directory), recurse
+    // If the value is an object (nested directory), recurse if not at max depth
     if (value && typeof value === 'object' && !Array.isArray(value)) {
-      const nextPrefix = prefix + (isLastKey ? ' '.repeat(options.indentSize) : options.branchChar + ' '.repeat(options.indentSize - 1));
-      const nestedLines = buildTree(value, nextPrefix, options);
-      lines.push(...nestedLines);
+      if (atMaxDepth) {
+        // Show indicator that there's more content
+        const childKeys = Object.keys(value);
+        if (childKeys.length > 0) {
+          const indicatorPrefix = prefix + (isLastKey ? ' '.repeat(options.indentSize) : options.branchChar + ' '.repeat(options.indentSize - 1));
+          lines.push(indicatorPrefix + '...');
+        }
+      } else {
+        const nextPrefix = prefix + (isLastKey ? ' '.repeat(options.indentSize) : options.branchChar + ' '.repeat(options.indentSize - 1));
+        const nestedLines = buildTree(value, nextPrefix, options, currentDepth + 1);
+        lines.push(...nestedLines);
+      }
     }
   });
   
@@ -62,6 +80,10 @@ export function schemaToTree(
     lines.push(opts.rootPrefix);
   }
   
+  // Check if we're at max depth (root level is depth 0)
+  const maxDepth = opts.maxDepth;
+  const atMaxDepth = maxDepth !== undefined && maxDepth <= 0;
+  
   keys.forEach((key, index) => {
     const isLastKey = index === keys.length - 1;
     const connector = isLastKey ? opts.cornerChar : opts.teeChar;
@@ -72,9 +94,18 @@ export function schemaToTree(
     
     const value = jsonObject[key];
     if (value && typeof value === 'object' && !Array.isArray(value)) {
-      const nextPrefix = prefix + (isLastKey ? ' '.repeat(opts.indentSize) : opts.branchChar + ' '.repeat(opts.indentSize - 1));
-      const nestedLines = buildTree(value, nextPrefix, opts);
-      lines.push(...nestedLines);
+      if (atMaxDepth) {
+        // Show indicator that there's more content
+        const childKeys = Object.keys(value);
+        if (childKeys.length > 0) {
+          const indicatorPrefix = prefix + (isLastKey ? ' '.repeat(opts.indentSize) : opts.branchChar + ' '.repeat(opts.indentSize - 1));
+          lines.push(indicatorPrefix + '...');
+        }
+      } else {
+        const nextPrefix = prefix + (isLastKey ? ' '.repeat(opts.indentSize) : opts.branchChar + ' '.repeat(opts.indentSize - 1));
+        const nestedLines = buildTree(value, nextPrefix, opts, 1);
+        lines.push(...nestedLines);
+      }
     }
   });
   

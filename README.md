@@ -175,8 +175,34 @@ const tree = schemaToTree(json, {
   cornerChar: '└',
   teeChar: '├',
   horizontalChar: '─',
-  indentSize: 2
+  indentSize: 2,
+  maxDepth: 3  // Limit tree depth to 3 levels
 });
+```
+
+### Max Depth
+
+You can limit the depth of the tree using the `maxDepth` option. When the maximum depth is reached, a `...` indicator is shown to indicate that there's more content below. The depth is counted from the root level (depth 0), so `maxDepth: 1` shows root items and their direct children, `maxDepth: 2` shows up to grandchildren, etc.
+
+```typescript
+// Limit to 2 levels deep (root + 2 levels)
+const tree = schemaToTree(deepStructure, { maxDepth: 2 });
+```
+
+Example output with `maxDepth: 2`:
+```
+.
+├── src
+│   ├── components
+│   │   ├── Button.tsx
+│   │   └── Input.tsx
+│   │       ...        // indicates more nested content
+│   └── utils
+│       └── helpers
+│           ...        // indicates more nested content
+└── tests
+    └── unit
+        ...
 ```
 
 ## License
