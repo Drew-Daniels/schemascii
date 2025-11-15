@@ -89,6 +89,10 @@ async function parseFileContent(content: string, filePath: string): Promise<Reco
   if (ext === '.yaml' || ext === '.yml') {
     const yaml = await import('js-yaml');
     return yaml.load(content) as Record<string, any>;
+  } else if (ext === '.jsonc') {
+    const stripJsonComments = await import('strip-json-comments');
+    const cleaned = stripJsonComments.default(content);
+    return JSON.parse(cleaned);
   } else {
     return JSON.parse(content);
   }

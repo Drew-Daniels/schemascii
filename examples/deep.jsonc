@@ -1,0 +1,74 @@
+{
+  // Main application directory
+  "app": {
+    // UI components
+    "components": {
+      "ui": {
+        // Button components
+        "buttons": {
+          "PrimaryButton.tsx": {},
+          "SecondaryButton.tsx": {}
+        },
+        // Form components
+        "forms": {
+          "Input.tsx": {},
+          "Textarea.tsx": {},
+          "Select.tsx": {}
+        }
+      },
+      // Layout components
+      "layout": {
+        "Header.tsx": {},
+        "Footer.tsx": {},
+        "Sidebar.tsx": {}
+      }
+    },
+    // Service layer
+    "services": {
+      "api": {
+        "endpoints": {
+          "users": {
+            "getUsers.ts": {},
+            "createUser.ts": {}
+          },
+          "posts": {
+            "getPosts.ts": {},
+            "createPost.ts": {}
+          }
+        },
+        "client.ts": {}
+      },
+      "cache": {
+        "redis.ts": {},
+        "memory.ts": {}
+      }
+    },
+    // Utility functions
+    "utils": {
+      "helpers": {
+        "format": {
+          "date.ts": {},
+          "currency.ts": {}
+        },
+        "validation": {
+          "email.ts": {},
+          "password.ts": {}
+        }
+      }
+    }
+  },
+  // Configuration files
+  "config": {
+    "development.json": {},
+    "production.json": {}
+  },
+  // Documentation
+  "docs": {
+    "api": {
+      "v1": {
+        "endpoints.md": {}
+      }
+    }
+  }
+}
+

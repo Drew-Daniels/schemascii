@@ -1,0 +1,8 @@
+{
+  // This is a shallow example with comments
+  "file1.txt": {},
+  "file2.txt": {},
+  // Another file
+  "file3.txt": {}
+}
+

@@ -1,0 +1,15 @@
+{
+  // Source code directory
+  "src": {
+    "index.js": {},
+    "utils.js": {}
+  },
+  // Test files
+  "tests": {
+    "test.js": {}
+  },
+  // Documentation
+  "README.md": {},
+  "package.json": {}
+}
+

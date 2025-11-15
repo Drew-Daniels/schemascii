@@ -11,10 +11,10 @@ async function main() {
     console.log(`
 Usage: json-to-tree <file> [options]
 
-Convert a JSON or YAML file structure to an ASCII directory tree.
+Convert a JSON, JSONC, or YAML file structure to an ASCII directory tree.
 
 Arguments:
-  <file>         Path to the JSON or YAML file to convert
+  <file>         Path to the JSON, JSONC, or YAML file to convert
 
 Options:
   --help, -h     Show this help message
@@ -22,6 +22,7 @@ Options:
 
 Examples:
   json-to-tree structure.json
+  json-to-tree structure.jsonc
   json-to-tree structure.yaml
   json-to-tree structure.json -o tree.txt
     `);
