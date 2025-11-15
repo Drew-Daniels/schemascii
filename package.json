@@ -29,7 +29,8 @@
     "tree",
     "directory",
     "ascii",
-    "cli"
+    "cli",
+    "schema"
   ],
   "author": "Drew Daniels",
   "repository": "Drew-Daniels/schemascii",
