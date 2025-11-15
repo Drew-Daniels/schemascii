@@ -19,7 +19,6 @@ const DEFAULT_OPTIONS: Required<TreeOptions> = {
 function buildTree(
   obj: Record<string, any>,
   prefix: string = '',
-  isLast: boolean = true,
   options: Required<TreeOptions> = DEFAULT_OPTIONS
 ): string[] {
   const lines: string[] = [];
@@ -37,7 +36,7 @@ function buildTree(
     // If the value is an object (nested directory), recurse
     if (value && typeof value === 'object' && !Array.isArray(value)) {
       const nextPrefix = prefix + (isLastKey ? ' '.repeat(options.indentSize) : options.branchChar + ' '.repeat(options.indentSize - 1));
-      const nestedLines = buildTree(value, nextPrefix, isLastKey, options);
+      const nestedLines = buildTree(value, nextPrefix, options);
       lines.push(...nestedLines);
     }
   });
@@ -74,7 +73,7 @@ export function jsonToTree(
     const value = jsonObject[key];
     if (value && typeof value === 'object' && !Array.isArray(value)) {
       const nextPrefix = prefix + (isLastKey ? ' '.repeat(opts.indentSize) : opts.branchChar + ' '.repeat(opts.indentSize - 1));
-      const nestedLines = buildTree(value, nextPrefix, isLastKey, opts);
+      const nestedLines = buildTree(value, nextPrefix, opts);
       lines.push(...nestedLines);
     }
   });

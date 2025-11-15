@@ -2,7 +2,6 @@
 
 import { fileToTree } from './index';
 import * as fs from 'fs';
-import * as path from 'path';
 
 async function main() {
   const args = process.argv.slice(2);
