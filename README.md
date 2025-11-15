@@ -1,6 +1,6 @@
 # json-to-tree
 
-Convert JSON file structure to ASCII directory tree.
+Convert JSON, JSONC, or YAML file structure to ASCII directory tree.
 
 ## Installation
 
@@ -11,16 +11,24 @@ npm install json-to-tree
 Or use it directly with npx:
 
 ```bash
-npx json-to-tree <json-file>
+npx json-to-tree <file>
 ```
+
+Supports JSON, JSONC, and YAML file formats.
 
 ## Usage
 
 ### CLI
 
 ```bash
-# Output to stdout
+# Output to stdout (JSON)
 json-to-tree structure.json
+
+# JSONC with comments
+json-to-tree structure.jsonc
+
+# YAML format
+json-to-tree structure.yaml
 
 # Output to file
 json-to-tree structure.json -o tree.txt
@@ -29,7 +37,7 @@ json-to-tree structure.json -o tree.txt
 ### Programmatic API
 
 ```typescript
-import { jsonToTree, jsonFileToTree } from 'json-to-tree';
+import { jsonToTree, jsonFileToTree, fileToTree } from 'json-to-tree';
 
 // From object
 const json = {
@@ -45,16 +53,22 @@ const json = {
 const tree = jsonToTree(json);
 console.log(tree);
 
-// From file
+// From file (auto-detects format: JSON, JSONC, or YAML)
+const tree = await fileToTree('structure.json');
+const tree2 = await fileToTree('structure.jsonc');
+const tree3 = await fileToTree('structure.yaml');
+console.log(tree);
+
+// Legacy alias (also supports all formats)
 const tree = await jsonFileToTree('structure.json');
 console.log(tree);
 ```
 
-## JSON Format
+## File Format
 
-Each key in the JSON object represents a directory. Nested objects represent nested directories.
+Each key in the object represents a directory. Nested objects represent nested directories. The tool supports JSON, JSONC (JSON with comments), and YAML formats.
 
-Example JSON:
+### JSON Example
 
 ```json
 {
@@ -75,7 +89,45 @@ Example JSON:
 }
 ```
 
-Output:
+### JSONC Example (with comments)
+
+```jsonc
+{
+  // Source code directory
+  "src": {
+    "components": {
+      "Button.tsx": {},
+      "Input.tsx": {}
+    },
+    "utils": {
+      // Helper utilities
+      "helpers": {
+        "format.ts": {}
+      }
+    }
+  },
+  // Test files
+  "tests": {
+    "unit": {}
+  }
+}
+```
+
+### YAML Example
+
+```yaml
+src:
+  components:
+    Button.tsx: {}
+    Input.tsx: {}
+  utils:
+    helpers:
+      format.ts: {}
+tests:
+  unit: {}
+```
+
+All formats produce the same output:
 
 ```
 .

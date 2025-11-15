@@ -44,7 +44,7 @@ function buildTree(
   return lines;
 }
 
-export function jsonToTree(
+export function schemaToTree(
   jsonObject: Record<string, any>,
   options: TreeOptions = {}
 ): string {
@@ -121,6 +121,6 @@ export async function fileToTree(
     opts.rootPrefix = basename;
   }
   
-  return jsonToTree(obj, opts);
+  return schemaToTree(obj, opts);
 }
 
