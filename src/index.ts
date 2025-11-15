@@ -51,7 +51,8 @@ function buildTree(
         const childKeys = Object.keys(value);
         if (childKeys.length > 0) {
           const indicatorPrefix = prefix + (isLastKey ? ' '.repeat(options.indentSize) : options.branchChar + ' '.repeat(options.indentSize - 1));
-          lines.push(indicatorPrefix + (options.maxDepthIndicator || '...'));
+          const indicator = options.maxDepthIndicator !== undefined ? options.maxDepthIndicator : '...';
+          lines.push(indicatorPrefix + indicator);
         }
       } else {
         const nextPrefix = prefix + (isLastKey ? ' '.repeat(options.indentSize) : options.branchChar + ' '.repeat(options.indentSize - 1));
@@ -101,7 +102,8 @@ export function schemaToTree(
         const childKeys = Object.keys(value);
         if (childKeys.length > 0) {
           const indicatorPrefix = prefix + (isLastKey ? ' '.repeat(opts.indentSize) : opts.branchChar + ' '.repeat(opts.indentSize - 1));
-          lines.push(indicatorPrefix + (opts.maxDepthIndicator || '...'));
+          const indicator = opts.maxDepthIndicator !== undefined ? opts.maxDepthIndicator : '...';
+          lines.push(indicatorPrefix + indicator);
         }
       } else {
         const nextPrefix = prefix + (isLastKey ? ' '.repeat(opts.indentSize) : opts.branchChar + ' '.repeat(opts.indentSize - 1));

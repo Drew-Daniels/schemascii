@@ -101,6 +101,85 @@ assert(depth2WithPrefix.includes('project'), 'Test 6: Shows root prefix');
 assert(depth2WithPrefix.includes('...'), 'Test 6: Shows ... indicator');
 console.log('\n');
 
+// Test 7: Custom indicator ">>>"
+console.log('Test 7: Custom indicator ">>>"');
+const customIndicator1 = schemaToTree(deepData, { maxDepth: 2, maxDepthIndicator: '>>>' });
+console.log(customIndicator1);
+assert(customIndicator1.includes('>>>'), 'Test 7: Shows custom indicator ">>>"');
+assert(!customIndicator1.includes('...'), 'Test 7: Does not show default indicator');
+console.log('\n');
+
+// Test 8: Custom indicator "[more]"
+console.log('Test 8: Custom indicator "[more]"');
+const customIndicator2 = schemaToTree(deepData, { maxDepth: 2, maxDepthIndicator: '[more]' });
+console.log(customIndicator2);
+assert(customIndicator2.includes('[more]'), 'Test 8: Shows custom indicator "[more]"');
+assert(!customIndicator2.includes('...'), 'Test 8: Does not show default indicator');
+console.log('\n');
+
+// Test 9: Custom indicator with special characters
+console.log('Test 9: Custom indicator "[truncated]"');
+const customIndicator3 = schemaToTree(deepData, { maxDepth: 2, maxDepthIndicator: '[truncated]' });
+console.log(customIndicator3);
+assert(customIndicator3.includes('[truncated]'), 'Test 9: Shows custom indicator "[truncated]"');
+console.log('\n');
+
+// Test 10: Single character indicator
+console.log('Test 10: Single character indicator "*"');
+const singleCharIndicator = schemaToTree(deepData, { maxDepth: 2, maxDepthIndicator: '*' });
+console.log(singleCharIndicator);
+assert(singleCharIndicator.includes('*'), 'Test 10: Shows single character indicator');
+assert(!singleCharIndicator.includes('...'), 'Test 10: Does not show default indicator');
+console.log('\n');
+
+// Test 11: Empty string indicator
+console.log('Test 11: Empty string indicator (should show nothing)');
+const emptyIndicator = schemaToTree(deepData, { maxDepth: 2, maxDepthIndicator: '' });
+console.log(emptyIndicator);
+// Empty indicator should show the line but with no text (empty string)
+assert(!emptyIndicator.includes('...'), 'Test 11: Does not show default indicator');
+// Check that the structure is still there but without indicator text
+assert(emptyIndicator.includes('Input.tsx'), 'Test 11: Shows structure');
+console.log('\n');
+
+// Test 12: Long indicator text
+console.log('Test 12: Long indicator text');
+const longIndicator = schemaToTree(deepData, { maxDepth: 2, maxDepthIndicator: '... (more content below) ...' });
+console.log(longIndicator);
+assert(longIndicator.includes('... (more content below) ...'), 'Test 12: Shows long indicator text');
+console.log('\n');
+
+// Test 13: Default indicator when not specified
+console.log('Test 13: Default indicator when not specified');
+const defaultIndicator = schemaToTree(deepData, { maxDepth: 2 });
+console.log(defaultIndicator);
+assert(defaultIndicator.includes('...'), 'Test 13: Shows default "..." indicator');
+console.log('\n');
+
+// Test 14: Custom indicator with max depth 0
+console.log('Test 14: Custom indicator with max depth 0');
+const depth0Custom = schemaToTree(deepData, { maxDepth: 0, maxDepthIndicator: '>>>' });
+console.log(depth0Custom);
+assert(depth0Custom.includes('>>>'), 'Test 14: Shows custom indicator at depth 0');
+assert(!depth0Custom.includes('...'), 'Test 14: Does not show default indicator');
+console.log('\n');
+
+// Test 15: Custom indicator combined with other options
+console.log('Test 15: Custom indicator with root prefix and custom chars');
+const combinedOptions = schemaToTree(deepData, { 
+  maxDepth: 2, 
+  maxDepthIndicator: '>>>',
+  rootPrefix: 'project',
+  branchChar: '|',
+  cornerChar: "'",
+  teeChar: '+'
+});
+console.log(combinedOptions);
+assert(combinedOptions.includes('project'), 'Test 15: Shows root prefix');
+assert(combinedOptions.includes('>>>'), 'Test 15: Shows custom indicator');
+assert(combinedOptions.includes('+'), 'Test 15: Shows custom tee char');
+console.log('\n');
+
 console.log('=== All max depth tests completed ===');
 console.log(`\nSummary: ${testsPassed} passed, ${testsFailed} failed`);
 process.exit(testsFailed > 0 ? 1 : 0);
