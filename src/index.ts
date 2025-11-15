@@ -113,7 +113,7 @@ export function jsonToTree(
   keys.forEach((key, index) => {
     const isLastKey = index === keys.length - 1;
     const connector = isLastKey ? opts.cornerChar : opts.teeChar;
-    const prefix = opts.rootPrefix || '';
+    const prefix = ''; // Don't use rootPrefix in tree structure, only show it once at top
     const currentPrefix = prefix + connector + opts.horizontalChar.repeat(opts.indentSize - 1) + ' ';
     
     lines.push(currentPrefix + key);
