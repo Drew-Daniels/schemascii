@@ -1,6 +1,6 @@
 {
   "name": "schemascii",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Convert JSON, JSONC, YAML, or XML file structure to ASCII directory tree",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
