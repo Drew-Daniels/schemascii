@@ -97,13 +97,6 @@ async function parseFileContent(content: string, filePath: string): Promise<Reco
   }
 }
 
-export async function jsonFileToTree(
-  filePath: string,
-  options: TreeOptions = {}
-): Promise<string> {
-  return fileToTree(filePath, options);
-}
-
 export async function fileToTree(
   filePath: string,
   options: TreeOptions = {}

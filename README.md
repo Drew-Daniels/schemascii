@@ -37,7 +37,7 @@ schemascii structure.json -o tree.txt
 ### Programmatic API
 
 ```typescript
-import { jsonToTree, jsonFileToTree, fileToTree } from 'schemascii';
+import { schemaToTree, fileToTree } from 'schemascii';
 
 // From object
 const json = {
@@ -50,17 +50,13 @@ const json = {
   "tests": {}
 };
 
-const tree = jsonToTree(json);
+const tree = schemaToTree(json);
 console.log(tree);
 
 // From file (auto-detects format: JSON, JSONC, or YAML)
 const tree = await fileToTree('structure.json');
 const tree2 = await fileToTree('structure.jsonc');
 const tree3 = await fileToTree('structure.yaml');
-console.log(tree);
-
-// Legacy alias (also supports all formats)
-const tree = await jsonFileToTree('structure.json');
 console.log(tree);
 ```
 
@@ -147,7 +143,7 @@ All formats produce the same output:
 You can customize the tree output with options:
 
 ```typescript
-const tree = jsonToTree(json, {
+const tree = schemaToTree(json, {
   rootPrefix: 'project',
   branchChar: '│',
   cornerChar: '└',
