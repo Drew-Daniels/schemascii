@@ -1,0 +1,65 @@
+{
+  "app": {
+    "components": {
+      "ui": {
+        "buttons": {
+          "PrimaryButton.tsx": {},
+          "SecondaryButton.tsx": {}
+        },
+        "forms": {
+          "Input.tsx": {},
+          "Textarea.tsx": {},
+          "Select.tsx": {}
+        }
+      },
+      "layout": {
+        "Header.tsx": {},
+        "Footer.tsx": {},
+        "Sidebar.tsx": {}
+      }
+    },
+    "services": {
+      "api": {
+        "endpoints": {
+          "users": {
+            "getUsers.ts": {},
+            "createUser.ts": {}
+          },
+          "posts": {
+            "getPosts.ts": {},
+            "createPost.ts": {}
+          }
+        },
+        "client.ts": {}
+      },
+      "cache": {
+        "redis.ts": {},
+        "memory.ts": {}
+      }
+    },
+    "utils": {
+      "helpers": {
+        "format": {
+          "date.ts": {},
+          "currency.ts": {}
+        },
+        "validation": {
+          "email.ts": {},
+          "password.ts": {}
+        }
+      }
+    }
+  },
+  "config": {
+    "development.json": {},
+    "production.json": {}
+  },
+  "docs": {
+    "api": {
+      "v1": {
+        "endpoints.md": {}
+      }
+    }
+  }
+}
+

@@ -1,0 +1,18 @@
+{
+  "root": {
+    "level1a": {
+      "level2a": {},
+      "level2b": {
+        "level3a": {},
+        "level3b": {
+          "level4": {}
+        }
+      }
+    },
+    "level1b": {},
+    "level1c": {
+      "level2c": {}
+    }
+  }
+}
+

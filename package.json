@@ -10,7 +10,11 @@
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",
-    "test": "node dist/cli.js example.json"
+    "test": "npm run test:shallow && npm run test:medium && npm run test:deep && npm run test:mixed",
+    "test:shallow": "echo \"=== shallow.json ===\" && node dist/cli.js examples/shallow.json",
+    "test:medium": "echo \"\\n=== medium.json ===\" && node dist/cli.js examples/medium.json",
+    "test:deep": "echo \"\\n=== deep.json ===\" && node dist/cli.js examples/deep.json",
+    "test:mixed": "echo \"\\n=== mixed.json ===\" && node dist/cli.js examples/mixed.json"
   },
   "keywords": [
     "json",
