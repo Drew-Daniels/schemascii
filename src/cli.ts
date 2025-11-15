@@ -1,9 +1,5 @@
 #!/usr/bin/env node
 
-/**
- * CLI interface for json-to-tree package
- */
-
 import { jsonFileToTree } from './index';
 import * as fs from 'fs';
 import * as path from 'path';
