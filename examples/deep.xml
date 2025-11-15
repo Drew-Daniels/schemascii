@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <src>
+    <components>
+      <Button.tsx />
+      <Input.tsx />
+      <Modal.tsx />
+    </components>
+    <utils>
+      <helpers>
+        <format.ts />
+        <validate.ts />
+      </helpers>
+      <constants>
+        <config.ts />
+      </constants>
+    </utils>
+    <hooks>
+      <useAuth.ts />
+      <useTheme.ts />
+    </hooks>
+  </src>
+  <tests>
+    <unit>
+      <components.test.tsx />
+      <utils.test.ts />
+    </unit>
+    <integration>
+      <api.test.ts />
+    </integration>
+  </tests>
+  <docs>
+    <api>
+      <README.md />
+    </api>
+  </docs>
+</root>
+

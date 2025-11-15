@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <src>
+    <index.js />
+    <utils.js />
+  </src>
+  <tests>
+    <test.js />
+  </tests>
+  <README.md />
+  <package.json />
+</root>
+

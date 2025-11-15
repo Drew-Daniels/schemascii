@@ -1,6 +1,6 @@
 # schemascii
 
-Convert JSON, JSONC, or YAML file structure to ASCII directory tree.
+Convert JSON, JSONC, YAML, or XML file structure to ASCII directory tree.
 
 ## Installation
 
@@ -14,7 +14,7 @@ Or use it directly with npx:
 npx schemascii <file>
 ```
 
-Supports JSON, JSONC, and YAML file formats.
+Supports JSON, JSONC, YAML, and XML file formats.
 
 ## Usage
 
@@ -29,6 +29,9 @@ schemascii structure.jsonc
 
 # YAML format
 schemascii structure.yaml
+
+# XML format
+schemascii structure.xml
 
 # Output to file
 schemascii structure.json -o tree.txt
@@ -53,16 +56,17 @@ const json = {
 const tree = schemaToTree(json);
 console.log(tree);
 
-// From file (auto-detects format: JSON, JSONC, or YAML)
+// From file (auto-detects format: JSON, JSONC, YAML, or XML)
 const tree = await fileToTree('structure.json');
 const tree2 = await fileToTree('structure.jsonc');
 const tree3 = await fileToTree('structure.yaml');
+const tree4 = await fileToTree('structure.xml');
 console.log(tree);
 ```
 
 ## File Format
 
-Each key in the object represents a directory. Nested objects represent nested directories. The tool supports JSON, JSONC (JSON with comments), and YAML formats.
+Each key in the object represents a directory. Nested objects represent nested directories. The tool supports JSON, JSONC (JSON with comments), YAML, and XML formats.
 
 ### JSON Example
 
@@ -121,6 +125,28 @@ src:
       format.ts: {}
 tests:
   unit: {}
+```
+
+### XML Example
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <src>
+    <components>
+      <Button.tsx />
+      <Input.tsx />
+    </components>
+    <utils>
+      <helpers>
+        <format.ts />
+      </helpers>
+    </utils>
+  </src>
+  <tests>
+    <unit />
+  </tests>
+</root>
 ```
 
 All formats produce the same output:

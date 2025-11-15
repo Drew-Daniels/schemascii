@@ -81,6 +81,93 @@ export function schemaToTree(
   return lines.join('\n');
 }
 
+function xmlToObject(xmlContent: string): Record<string, any> {
+  const { XMLParser } = require('fast-xml-parser');
+  const parser = new XMLParser({
+    ignoreAttributes: true,
+    ignoreNameSpace: true,
+    removeNSPrefix: true,
+    parseAttributeValue: false,
+    parseNodeValue: false,
+    trimValues: true,
+    parseTrueNumberOnly: false,
+    arrayMode: false,
+    alwaysCreateTextNode: false,
+    textNodeName: '#text'
+  });
+  
+  const result = parser.parse(xmlContent);
+  
+  // Convert XML structure to our expected format
+  // XML elements map to directory/file structure
+  function convertXmlNode(node: any): any {
+    if (typeof node !== 'object' || node === null) {
+      return {};
+    }
+    
+    // Handle arrays - merge them into the result
+    if (Array.isArray(node)) {
+      const result: Record<string, any> = {};
+      node.forEach((item) => {
+        if (typeof item === 'object' && item !== null) {
+          for (const [key, value] of Object.entries(item)) {
+            if (key !== '#text') {
+              result[key] = convertXmlNode(value);
+            }
+          }
+        }
+      });
+      return result;
+    }
+    
+    const result: Record<string, any> = {};
+    
+    for (const [key, value] of Object.entries(node)) {
+      // Skip text content and processing instructions
+      if (key === '#text' || key.startsWith('?xml')) {
+        continue;
+      }
+      
+      if (typeof value === 'object' && value !== null) {
+        // Check if this has child elements (not just text)
+        const childKeys = Object.keys(value).filter(k => k !== '#text');
+        
+        if (childKeys.length > 0) {
+          // Has children - recurse
+          result[key] = convertXmlNode(value);
+        } else {
+          // Leaf node - empty object represents a file/directory
+          result[key] = {};
+        }
+      } else {
+        // Primitive value - treat as leaf
+        result[key] = {};
+      }
+    }
+    
+    return result;
+  }
+  
+  // Get the root element(s)
+  const rootKeys = Object.keys(result).filter(k => !k.startsWith('?xml'));
+  
+  if (rootKeys.length === 1) {
+    // Single root element - extract its children
+    const rootKey = rootKeys[0];
+    const rootValue = result[rootKey];
+    if (typeof rootValue === 'object' && rootValue !== null) {
+      return convertXmlNode(rootValue);
+    }
+    return { [rootKey]: {} };
+  } else if (rootKeys.length > 1) {
+    // Multiple root elements
+    return convertXmlNode(result);
+  } else {
+    // No valid root found
+    return {};
+  }
+}
+
 async function parseFileContent(content: string, filePath: string): Promise<Record<string, any>> {
   const path = await import('path');
   const ext = path.extname(filePath).toLowerCase();
@@ -92,6 +179,8 @@ async function parseFileContent(content: string, filePath: string): Promise<Reco
     const stripJsonComments = await import('strip-json-comments');
     const cleaned = stripJsonComments.default(content);
     return JSON.parse(cleaned);
+  } else if (ext === '.xml') {
+    return xmlToObject(content);
   } else {
     return JSON.parse(content);
   }

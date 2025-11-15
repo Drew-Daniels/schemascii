@@ -8,22 +8,23 @@ async function main() {
   
   if (args.length === 0 || args[0] === '--help' || args[0] === '-h') {
     console.log(`
-Usage: json-to-tree <file> [options]
+Usage: schemascii <file> [options]
 
-Convert a JSON, JSONC, or YAML file structure to an ASCII directory tree.
+Convert a JSON, JSONC, YAML, or XML file structure to an ASCII directory tree.
 
 Arguments:
-  <file>         Path to the JSON, JSONC, or YAML file to convert
+  <file>         Path to the JSON, JSONC, YAML, or XML file to convert
 
 Options:
   --help, -h     Show this help message
   --output, -o   Output file path (default: stdout)
 
 Examples:
-  json-to-tree structure.json
-  json-to-tree structure.jsonc
-  json-to-tree structure.yaml
-  json-to-tree structure.json -o tree.txt
+  schemascii structure.json
+  schemascii structure.jsonc
+  schemascii structure.yaml
+  schemascii structure.xml
+  schemascii structure.json -o tree.txt
     `);
     process.exit(0);
   }
