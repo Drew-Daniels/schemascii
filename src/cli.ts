@@ -27,7 +27,7 @@ function parseOptions(args: string[]): { options: TreeOptions; outputFile?: stri
     }
     
     // Handle TreeOptions
-    if (arg === '--root-prefix' || arg === '--rootPrefix' || arg === '-r') {
+    if (arg === '--root-prefix' || arg === '-r') {
       if (i + 1 < args.length) {
         result.options.rootPrefix = args[i + 1];
         i += 2;
@@ -35,7 +35,7 @@ function parseOptions(args: string[]): { options: TreeOptions; outputFile?: stri
       }
     }
     
-    if (arg === '--branch-char' || arg === '--branchChar' || arg === '-b') {
+    if (arg === '--branch-char' || arg === '-b') {
       if (i + 1 < args.length) {
         result.options.branchChar = args[i + 1];
         i += 2;
@@ -43,7 +43,7 @@ function parseOptions(args: string[]): { options: TreeOptions; outputFile?: stri
       }
     }
     
-    if (arg === '--corner-char' || arg === '--cornerChar' || arg === '-c') {
+    if (arg === '--corner-char' || arg === '-c') {
       if (i + 1 < args.length) {
         result.options.cornerChar = args[i + 1];
         i += 2;
@@ -51,7 +51,7 @@ function parseOptions(args: string[]): { options: TreeOptions; outputFile?: stri
       }
     }
     
-    if (arg === '--tee-char' || arg === '--teeChar' || arg === '-t') {
+    if (arg === '--tee-char' || arg === '-t') {
       if (i + 1 < args.length) {
         result.options.teeChar = args[i + 1];
         i += 2;
@@ -59,7 +59,7 @@ function parseOptions(args: string[]): { options: TreeOptions; outputFile?: stri
       }
     }
     
-    if (arg === '--horizontal-char' || arg === '--horizontalChar' || arg === '-H') {
+    if (arg === '--horizontal-char' || arg === '-H') {
       if (i + 1 < args.length) {
         result.options.horizontalChar = args[i + 1];
         i += 2;
@@ -67,7 +67,7 @@ function parseOptions(args: string[]): { options: TreeOptions; outputFile?: stri
       }
     }
     
-    if (arg === '--indent-size' || arg === '--indentSize' || arg === '-i') {
+    if (arg === '--indent-size' || arg === '-i') {
       if (i + 1 < args.length) {
         const size = parseInt(args[i + 1], 10);
         if (!isNaN(size)) {
@@ -78,7 +78,7 @@ function parseOptions(args: string[]): { options: TreeOptions; outputFile?: stri
       }
     }
     
-    if (arg === '--max-depth' || arg === '--maxDepth' || arg === '-d') {
+    if (arg === '--max-depth' || arg === '-d') {
       if (i + 1 < args.length) {
         const depth = parseInt(args[i + 1], 10);
         if (!isNaN(depth)) {
