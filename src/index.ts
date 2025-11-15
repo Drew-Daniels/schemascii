@@ -82,7 +82,26 @@ export function jsonToTree(
   return lines.join('\n');
 }
 
+async function parseFileContent(content: string, filePath: string): Promise<Record<string, any>> {
+  const path = await import('path');
+  const ext = path.extname(filePath).toLowerCase();
+  
+  if (ext === '.yaml' || ext === '.yml') {
+    const yaml = await import('js-yaml');
+    return yaml.load(content) as Record<string, any>;
+  } else {
+    return JSON.parse(content);
+  }
+}
+
 export async function jsonFileToTree(
+  filePath: string,
+  options: TreeOptions = {}
+): Promise<string> {
+  return fileToTree(filePath, options);
+}
+
+export async function fileToTree(
   filePath: string,
   options: TreeOptions = {}
 ): Promise<string> {
@@ -90,7 +109,7 @@ export async function jsonFileToTree(
   const path = await import('path');
   
   const content = await fs.readFile(filePath, 'utf-8');
-  const jsonObject = JSON.parse(content);
+  const obj = await parseFileContent(content, filePath);
   
   // Use filename (without extension) as root prefix if not provided
   const opts = { ...options };
@@ -99,6 +118,6 @@ export async function jsonFileToTree(
     opts.rootPrefix = basename;
   }
   
-  return jsonToTree(jsonObject, opts);
+  return jsonToTree(obj, opts);
 }
 

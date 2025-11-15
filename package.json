@@ -1,7 +1,7 @@
 {
   "name": "json-to-tree",
   "version": "1.0.0",
-  "description": "Convert JSON file structure to ASCII directory tree",
+  "description": "Convert JSON or YAML file structure to ASCII directory tree",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
@@ -10,14 +10,18 @@
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",
-    "test": "npm run test:shallow && npm run test:medium && npm run test:deep && npm run test:mixed",
-    "test:shallow": "echo \"=== shallow.json ===\" && node dist/cli.js examples/shallow.json",
-    "test:medium": "echo \"\\n=== medium.json ===\" && node dist/cli.js examples/medium.json",
-    "test:deep": "echo \"\\n=== deep.json ===\" && node dist/cli.js examples/deep.json",
-    "test:mixed": "echo \"\\n=== mixed.json ===\" && node dist/cli.js examples/mixed.json"
+    "test": "npm run test:shallow:json && npm run test:medium:json && npm run test:deep:json && npm run test:mixed:json && npm run test:shallow:yaml && npm run test:medium:yaml && npm run test:deep:yaml",
+    "test:shallow:json": "echo \"=== shallow.json ===\" && node dist/cli.js examples/shallow.json",
+    "test:medium:json": "echo \"\\n=== medium.json ===\" && node dist/cli.js examples/medium.json",
+    "test:deep:json": "echo \"\\n=== deep.json ===\" && node dist/cli.js examples/deep.json",
+    "test:mixed:json": "echo \"\\n=== mixed.json ===\" && node dist/cli.js examples/mixed.json",
+    "test:shallow:yaml": "echo \"\\n=== shallow.yaml ===\" && node dist/cli.js examples/shallow.yaml",
+    "test:medium:yaml": "echo \"\\n=== medium.yaml ===\" && node dist/cli.js examples/medium.yaml",
+    "test:deep:yaml": "echo \"\\n=== deep.yaml ===\" && node dist/cli.js examples/deep.yaml"
   },
   "keywords": [
     "json",
+    "yaml",
     "tree",
     "directory",
     "ascii",
@@ -27,11 +31,15 @@
   "repository": "Drew-Daniels/json-to-tree",
   "license": "MIT",
   "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.0.0",
     "typescript": "^5.0.0"
   },
   "files": [
     "dist",
     "README.md"
-  ]
+  ],
+  "dependencies": {
+    "js-yaml": "^4.1.1"
+  }
 }

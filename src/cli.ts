@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { jsonFileToTree } from './index';
+import { fileToTree } from './index';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -9,12 +9,12 @@ async function main() {
   
   if (args.length === 0 || args[0] === '--help' || args[0] === '-h') {
     console.log(`
-Usage: json-to-tree <json-file> [options]
+Usage: json-to-tree <file> [options]
 
-Convert a JSON file structure to an ASCII directory tree.
+Convert a JSON or YAML file structure to an ASCII directory tree.
 
 Arguments:
-  <json-file>    Path to the JSON file to convert
+  <file>         Path to the JSON or YAML file to convert
 
 Options:
   --help, -h     Show this help message
@@ -22,6 +22,7 @@ Options:
 
 Examples:
   json-to-tree structure.json
+  json-to-tree structure.yaml
   json-to-tree structure.json -o tree.txt
     `);
     process.exit(0);
@@ -36,7 +37,7 @@ Examples:
   }
   
   try {
-    const tree = await jsonFileToTree(inputFile);
+    const tree = await fileToTree(inputFile);
     
     // Check for output option
     const outputIndex = args.indexOf('--output') !== -1 
@@ -54,7 +55,7 @@ Examples:
     if (error instanceof Error) {
       console.error(`Error: ${error.message}`);
     } else {
-      console.error('Error: Failed to process JSON file.');
+      console.error('Error: Failed to process file.');
     }
     process.exit(1);
   }
