@@ -1,11 +1,11 @@
 {
-  "name": "json-to-tree",
+  "name": "schemascii",
   "version": "1.0.0",
   "description": "Convert JSON, JSONC, or YAML file structure to ASCII directory tree",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "json-to-tree": "dist/cli.js"
+    "schemascii": "dist/cli.js"
   },
   "scripts": {
     "build": "tsc",
@@ -32,7 +32,7 @@
     "cli"
   ],
   "author": "Drew Daniels",
-  "repository": "Drew-Daniels/json-to-tree",
+  "repository": "Drew-Daniels/schemascii",
   "license": "MIT",
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
