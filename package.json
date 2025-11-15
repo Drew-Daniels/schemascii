@@ -1,0 +1,33 @@
+{
+  "name": "json-to-tree",
+  "version": "1.0.0",
+  "description": "Convert JSON file structure to ASCII directory tree",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "json-to-tree": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "node dist/cli.js example.json"
+  },
+  "keywords": [
+    "json",
+    "tree",
+    "directory",
+    "ascii",
+    "cli"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
+}
+
